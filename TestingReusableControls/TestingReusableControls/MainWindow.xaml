@@ -10,7 +10,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -30,12 +29,8 @@
         <Button x:Name="ClearButton" Content="Clear" Grid.Column="0" Grid.Row="0"
                 Height="30" Width="100" Click="ClearButton_Click" IsEnabled="false"/>
 
-        <StackPanel  x:Name="myPanel2" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3">
-            <ListBox x:Name="MyList"/>
-        </StackPanel>
 
-
-        <ScrollViewer x:Name="myScroll"  Grid.Row="2" HorizontalScrollBarVisibility="Auto"
+        <ScrollViewer x:Name="myScroll"  Grid.Row="1" HorizontalScrollBarVisibility="Auto"
                       Grid.ColumnSpan="3">
             <StackPanel  x:Name="myPanel" Orientation="Horizontal">
 

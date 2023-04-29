@@ -45,40 +45,52 @@ namespace TestingReusableControls
                 myPanel.Children.Clear();
                 
             }
-
             
             string[] arr = new string[] { "basic", "pro", "enterprise" , "super basic" , "super Pro", "super Enterprise"};
             var colors = new Brush[] { Brushes.Bisque, Brushes.Black, Brushes.Green, Brushes.BlueViolet, Brushes.DeepPink, Brushes.Crimson };
             var words = new string[] { "bbbbbasic", "pro", "advanced", "super basic", "super Pro", "super Enterprise" };
-            int randomNum = rnd.Next(0, arr.Length);
+            
             int num = rnd.Next(0, 10);
 
-            for (int i = 0; i < num; i++)
+            List<int> rowsList = new List<int>();
+            List<int> columnsList = new List<int>();
+            for(int i = 0; i< num; i++)
             {
-                for(int j = 0; j<num; j++)
-                {
-                    ForTierCard forTier = new ForTierCard(j, i, arr[randomNum], colors[randomNum], words[randomNum]);
-                    tiers.Add(forTier.newTier);
-                }
+                rowsList.Add(i);
+                columnsList.Add(i);
             }
 
-            for (int i = 0; i< rnd.Next(0, 10); i++)
+            while(rowsList.Count > 0)
             {
-                for(int j = 0; j < rnd.Next(0, 10); i++)
-                {
-                    
-                    ColumnDefinition column = new ColumnDefinition();
-                    column.Width = new GridLength(300);
-                    myGrid.ColumnDefinitions.Add(column);
-                }
+                int randomNum = rnd.Next(0, arr.Length);
+                int a = rnd.Next(0, columnsList.Count - 1);
+                int b = rnd.Next(0, rowsList.Count - 1);
+                ForTierCard forTier = new ForTierCard(columnsList[a], rowsList[b], arr[randomNum], colors[randomNum], words[randomNum]);
+                columnsList.RemoveAt(a);
+                rowsList.RemoveAt(b);
+                tiers.Add(forTier.newTier);
+            }
+
+
+            for(int i =0; i<num; i++)
+            {
+                ColumnDefinition column = new ColumnDefinition();
+                column.Width = new GridLength(300);
+                myGrid.ColumnDefinitions.Add(column);
                 RowDefinition row = new RowDefinition();
                 row.Height = new GridLength(400);
                 myGrid.RowDefinitions.Add(row);
             }
 
-            foreach(var k in tiers)
+
+
+
+
+
+
+            for (int i = 0; i<tiers.Count; i++ )
             {
-                myGrid.Children.Add(k);
+                myGrid.Children.Add(tiers[i]);
             }
             
             myPanel.Children.Add(myGrid);
@@ -86,6 +98,7 @@ namespace TestingReusableControls
             GeneratingButton.IsEnabled = false;
             ClearButton.IsEnabled = true;
 
+            
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -99,39 +112,47 @@ namespace TestingReusableControls
         }
     }
 
-    //for(int i = 0; i<3; i++)
-    //        {
-    //            ColumnDefinition column = new ColumnDefinition();
-    //            RowDefinition row = new RowDefinition();
-    //            column.Width = new GridLength(200);
-    //            row.Height = new GridLength(500);
-    //            myGrid.ColumnDefinitions.Add(column);
-    //            myGrid.RowDefinitions.Add(row);
-
-    //        }
-    //        myPanel.Children.Add(myGrid);
-
-    //for (int i = 0; i < 3; i++)
-    //{
-    //    TierCard tierCard = new TierCard();
-    //    tierCard.Color = colors[i];
-    //    tierCard.Description = words[i];
-    //    tierCard.Header = arr[i];
-    //    Grid.SetColumn(tierCard, i);
-    //    Grid.SetRow(tierCard, i);
-    //    controlUser.Add(tierCard);
-    //    Debug.Print("je");
-    //}
-
-    //myItems.ItemsSource = controlUser;
-
-
-    //var a = tiers[i];
-    //ColumnDefinition column = new ColumnDefinition();
-    //column.Width = new GridLength(300);
-    //RowDefinition row = new RowDefinition();
-    //row.Height = new GridLength(400);
-    //myGrid.RowDefinitions.Add(row);
-    //myGrid.ColumnDefinitions.Add(column);
-    //myGrid.Children.Add(a);
 }
+
+
+
+
+
+
+
+
+//for(int i = 0; i<3; i++)
+//        {
+//            ColumnDefinition column = new ColumnDefinition();
+//            RowDefinition row = new RowDefinition();
+//            column.Width = new GridLength(200);
+//            row.Height = new GridLength(500);
+//            myGrid.ColumnDefinitions.Add(column);
+//            myGrid.RowDefinitions.Add(row);
+
+//        }
+//        myPanel.Children.Add(myGrid);
+
+//for (int i = 0; i < 3; i++)
+//{
+//    TierCard tierCard = new TierCard();
+//    tierCard.Color = colors[i];
+//    tierCard.Description = words[i];
+//    tierCard.Header = arr[i];
+//    Grid.SetColumn(tierCard, i);
+//    Grid.SetRow(tierCard, i);
+//    controlUser.Add(tierCard);
+//    Debug.Print("je");
+//}
+
+//myItems.ItemsSource = controlUser;
+
+
+//var a = tiers[i];
+//ColumnDefinition column = new ColumnDefinition();
+//column.Width = new GridLength(300);
+//RowDefinition row = new RowDefinition();
+//row.Height = new GridLength(400);
+//myGrid.RowDefinitions.Add(row);
+//myGrid.ColumnDefinitions.Add(column);
+//myGrid.Children.Add(a);
